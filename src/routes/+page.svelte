@@ -1,19 +1,16 @@
 <script>
     import { writable } from 'svelte/store';
-
     const cart = writable([]);
+    export let data;
     let items = 0;
+    let headline = "Handmade Sweetness, Straight from Our Kitchen!";
+    let subtext = "Freshly baked cupcakes, soft cinnamon rolls, melt-in-your-mouth Gulab Jamun, and crispy palm tree leaf pastries—made with love and the finest ingredients.";
+    let selectedOptions = {};
+    let selectedQuantities = {};
 
     $: {
         items = $cart.reduce((total,item) => total + item.quantity, 0);
     }
-
-    let headline = "Handmade Sweetness, Straight from Our Kitchen!";
-    let subtext = "Freshly baked cupcakes, soft cinnamon rolls, melt-in-your-mouth Gulab Jamun, and crispy palm tree leaf pastries—made with love and the finest ingredients.";
-    export let data;
-
-    let selectedOptions = {};
-    let selectedQuantities = {};
 
     data.products.forEach( product => {
         const firsOption = Object.keys(product.pricing)[0];
@@ -36,27 +33,23 @@
         }
     }
     
-    // Add item to cart
     function handleAdd(product) {
         const option = selectedOptions[product.id];
         const price = product.pricing[option];
         const quantity = selectedQuantities[product.id];
         
         cart.update(items => {
-            // Check if product with same option exists
             const existingItem = items.find(item => 
                 item.productId === product.id && item.option === option
             );
             
             if (existingItem) {
-                // Update quantity if already in cart
                 return items.map(item => 
                     (item.productId === product.id && item.option === option)
                         ? {...item, quantity: item.quantity + quantity}
                         : item
                 );
             } else {
-                // Add new item
                 return [...items, {
                     productId: product.id,
                     name: product.name,
