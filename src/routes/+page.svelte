@@ -91,7 +91,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                 {#each data.products as product}
                     <div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform hover:scale-105">
-                        <div class="aspect-square">
+                        <div class="lg:aspect-square">
                             <img src={product.image} alt={product.name} class="w-full h-full object-cover">
                         </div>   
                         <div class="p-4 text-center">
@@ -120,7 +120,7 @@
         <section class="bg-white rounded-xl p-8 text-center shadow-lg mb-12">
             <h3 class="text-2xl font-bold mb-6">Ready to Treat Yourself?</h3>
             <button class="bg-[#8B4513] text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-[#6B4226] transition-colors">
-                Proceed to Checkout with MB WAY
+                Proceed to Checkout
             </button>
         </section>
     </main>
